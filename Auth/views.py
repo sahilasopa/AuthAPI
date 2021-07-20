@@ -4,6 +4,7 @@ import jwt
 from rest_framework.decorators import api_view
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.response import Response
+
 from .models import User
 from .serializers import UserSerializer, RegisterSerializer, ProfileSerializer
 
@@ -97,7 +98,7 @@ def UserLogin(request):
         user = User.objects.filter(username=username).first()
 
         if user is None:
-            return Response("Invalid Credentials")
+            return Response({"response": "Invalid Credentials"})
 
         if not user.check_password(password):
             return Response({"response": "Invalid Credentials"})
